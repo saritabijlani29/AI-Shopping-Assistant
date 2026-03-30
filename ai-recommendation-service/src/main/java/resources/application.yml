@@ -1,0 +1,32 @@
+github:
+  token: ${git_hub_token}
+
+llm:
+  endpoint: https://models.inference.ai.azure.com
+  model: gpt-4o-mini
+
+server:
+  port: 8082
+
+services:
+  product:
+    base-url: http://localhost:8080   # gateway URL (recommended)
+    search-endpoint: /api/products/search
+    timeout: 10
+  cache:
+    base-url: http://localhost:8080
+    endpoint: /api/cache/products
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      productServiceCB:
+        register-health-indicator: true
+        sliding-window-size: 5
+        minimum-number-of-calls: 3
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 5000ms
+
+logging:
+  level:
+    io.github.resilience4j: DEBUG
