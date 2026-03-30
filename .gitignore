@@ -1,0 +1,60 @@
+# Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# IntelliJ
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Environment / secrets
+.env
+.env.*
+application-local.yml
+application-dev.yml
+*.pem
+*.key
+
+# Docker
+docker-compose.override.yml
+
+# Redis / temp
+dump.rdb
+temp/
+tmp/
+
+# Node (if frontend later)
+node_modules/
+
+# Build artifacts
+out/
+build/
+
+# Mac/Linux temp
+*.swp
+*.swo
+
+# Windows temp
+desktop.ini
+
+# Coverage / test
+coverage/
+surefire-reports/
