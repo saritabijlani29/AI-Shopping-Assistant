@@ -12,6 +12,7 @@ services:
     expose:
       - "8081"
     environment:
+      SERPAPI_KEY: ${SERPAPI_KEY}
       JAVA_OPTS: "-Xms128m -Xmx256m"
 
   cache-service:
@@ -26,6 +27,7 @@ services:
     expose:
       - "8082"
     environment:
+      GIT_HUB_TOKEN: ${GIT_HUB_TOKEN}
       JAVA_OPTS: "-Xms128m -Xmx256m"
 
   gateway:

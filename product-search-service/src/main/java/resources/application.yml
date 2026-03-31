@@ -2,4 +2,4 @@ server:
   port: 8081
 
 serpapi:
-  key: ${serp_api_key}
+  key: ${SERP_API_KEY}

@@ -1,5 +1,5 @@
 github:
-  token: ${git_hub_token}
+  token: ${GIT_HUB_TOKEN}
 
 llm:
   endpoint: https://models.inference.ai.azure.com
