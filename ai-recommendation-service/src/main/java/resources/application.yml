@@ -10,11 +10,11 @@ server:
 
 services:
   product:
-    base-url: http://localhost:8080   # gateway URL (recommended)
+    base-url: http://product-search-service:8080   # gateway URL (recommended)
     search-endpoint: /api/products/search
     timeout: 10
   cache:
-    base-url: http://localhost:8080
+    base-url: http://cache-service:8080
     endpoint: /api/cache/products
 
 resilience4j:
