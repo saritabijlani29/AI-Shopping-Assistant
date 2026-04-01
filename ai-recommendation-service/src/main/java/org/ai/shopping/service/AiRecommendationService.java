@@ -2,6 +2,7 @@ package org.ai.shopping.service;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
+import jakarta.annotation.PostConstruct;
 import org.ai.shopping.controller.RecommendationController;
 import org.ai.shopping.model.LlmRequest;
 import org.ai.shopping.model.LlmResponse;
@@ -21,8 +22,9 @@ import java.util.List;
 @Service
 public class AiRecommendationService {
 
-    private final WebClient webClient;
+    private WebClient webClient;
     private static final Logger log = LoggerFactory.getLogger(AiRecommendationService.class);
+    private final WebClient.Builder builder;
 
     @Value("${github.token}")
     private String githubToken;
@@ -30,10 +32,18 @@ public class AiRecommendationService {
     @Value("${llm.model}")
     private String model;
 
-    public AiRecommendationService(WebClient.Builder builder,
-                                   @Value("${llm.endpoint}") String endpoint) {
+    @Value("${llm.endpoint}")
+    private String endpoint;
 
-        this.webClient = builder.baseUrl(endpoint).build();
+    public AiRecommendationService(WebClient webClient, WebClient.Builder builder) {
+        this.webClient = webClient;
+        this.builder = builder;
+    }
+    @PostConstruct
+    public void init() {
+        this.webClient = builder
+                .baseUrl(endpoint)
+                .build();
     }
 
     public Mono<String> recommendTopProducts(List<Product> products, String query){
