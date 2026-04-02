@@ -1,63 +1,65 @@
-version: '3.8'
-
 services:
   redis:
     image: redis:7-alpine
     container_name: redis-cache
+    restart: always
     expose:
       - "6379"
     deploy:
       resources:
         limits:
-          memory: 64M
+          memory: 256M
 
   product-search-service:
     image: saritab/product-search-service:latest
     container_name: product-search
+    restart: on-failure
     expose:
       - "8081"
     environment:
-      SERPAPI_KEY: ${SERPAPI_KEY}
-      # JVM Heap: 64MB start, 128MB max
-      JAVA_OPTS: "-Xms64m -Xmx128m"
+      SERPAPI_KEY: ${SERP_API_KEY}
+      JAVA_OPTS: "-Xms128m -Xmx312m"
     deploy:
       resources:
         limits:
-          memory: 200M
+          memory: 512M
 
   cache-service:
     image: saritab/cache-service:latest
     container_name: cache-service
+    restart: on-failure
     expose:
       - "8083"
     environment:
-      JAVA_OPTS: "-Xms64m -Xmx128m"
+      JAVA_OPTS: "-Xms128m -Xmx312m"
     deploy:
       resources:
         limits:
-          memory: 200M
+          memory: 512M
 
   ai-service:
     image: saritab/ai-recommendation-service:latest
     container_name: ai-service
+    restart: on-failure
     expose:
       - "8082"
     environment:
       GIT_HUB_TOKEN: ${GIT_HUB_TOKEN}
-      JAVA_OPTS: "-Xms64m -Xmx128m"
+      JAVA_OPTS: "-Xms256m -Xmx512m"
     deploy:
       resources:
         limits:
-          memory: 200M
+          memory: 768M
 
   gateway:
     image: saritab/api-gateway:latest
     container_name: api-gateway
+    restart: always
     ports:
       - "8080:8080"
     environment:
-      JAVA_OPTS: "-Xms64m -Xmx128m"
+      JAVA_OPTS: "-Xms256m -Xmx512m"
     deploy:
       resources:
         limits:
-          memory: 200M
+          memory: 768M
