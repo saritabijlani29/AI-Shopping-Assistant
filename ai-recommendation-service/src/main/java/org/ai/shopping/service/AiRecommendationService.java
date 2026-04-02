@@ -1,19 +1,14 @@
 package org.ai.shopping.service;
 
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import io.github.resilience4j.retry.annotation.Retry;
 import jakarta.annotation.PostConstruct;
-import org.ai.shopping.controller.RecommendationController;
 import org.ai.shopping.model.LlmRequest;
 import org.ai.shopping.model.LlmResponse;
 import org.ai.shopping.model.Product;
 import org.ai.shopping.util.PromptBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 

@@ -19,4 +19,9 @@ public class WebClientConfig {
     public CircuitBreaker productServiceCircuitBreaker(CircuitBreakerRegistry registry) {
         return registry.circuitBreaker("productServiceCB");
     }
+    @Bean
+    public WebClient webClient() {
+        return WebClient.create();
+    }
+
 }
