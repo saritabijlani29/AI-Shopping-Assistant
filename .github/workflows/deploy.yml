@@ -49,7 +49,7 @@ jobs:
           script: |
             mkdir -p ~/deploy
             # This creates the .env file fresh every time you deploy
-            echo "SERPAPI_KEY=${{ vars.SERPAPI_KEY }}" > ~/deploy/.env
+            echo "SERP_API_KEY=${{ vars.SERP_API_KEY }}" > ~/deploy/.env
             echo "GIT_HUB_TOKEN=${{ vars.GIT_HUB_TOKEN }}" >> ~/deploy/.env
             echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> ~/deploy/.env
 
