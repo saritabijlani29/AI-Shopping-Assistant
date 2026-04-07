@@ -37,6 +37,9 @@ management:
       probes:
         enabled: true
       show-details: always
+  health:
+    redis:
+      enabled: false
 
 logging:
   level:
