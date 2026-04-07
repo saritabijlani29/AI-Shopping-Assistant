@@ -4,6 +4,10 @@ server:
 spring:
   cloud:
     gateway:
+      httpclient:
+        connect-timeout: 5000
+        response-timeout: 50s
+
       routes:
         - id: product-search-service
           uri: http://product-search-service:8081
@@ -17,7 +21,7 @@ spring:
           predicates:
             - Path=/api/ai/**
           metadata:
-            response-timeout: 20000   # in milliseconds
+            response-timeout: 30s   # in milliseconds
             connect-timeout: 5000
           filters:
             - StripPrefix=1
@@ -32,3 +36,12 @@ spring:
             - Path=/api/cache/**
           filters:
             - StripPrefix=1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
